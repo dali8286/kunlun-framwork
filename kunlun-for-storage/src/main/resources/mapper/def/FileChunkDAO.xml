@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.htby.tech.kunlun.storage.dao.auto.FileChunkDAO">
+  <resultMap id="BaseResultMap" type="com.htby.tech.kunlun.storage.entity.auto.FileChunkPO">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="chunk_no" jdbcType="INTEGER" property="chunkNo" />
+    <result column="chunk_total" jdbcType="INTEGER" property="chunkTotal" />
+    <result column="file_name" jdbcType="VARCHAR" property="fileName" />
+    <result column="file_md5" jdbcType="CHAR" property="fileMd5" />
+    <result column="mime_type" jdbcType="VARCHAR" property="mimeType" />
+    <result column="external_path" jdbcType="VARCHAR" property="externalPath" />
+    <result column="creator" jdbcType="CHAR" property="creator" />
+    <result column="mender" jdbcType="CHAR" property="mender" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="is_del" jdbcType="TINYINT" property="isDel" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, chunk_no, chunk_total, file_name, file_md5, mime_type, external_path, creator, 
+    mender, create_time, update_time, is_del
+  </sql>
+  <select id="selectByExample" parameterType="com.htby.tech.kunlun.storage.entity.auto.FileChunkPOExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_file_chunk
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+    <if test="forUpdate != null and forUpdate == true">
+      for update
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_file_chunk
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_file_chunk
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.htby.tech.kunlun.storage.entity.auto.FileChunkPOExample">
+    delete from t_file_chunk
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.htby.tech.kunlun.storage.entity.auto.FileChunkPO">
+    insert into t_file_chunk (id, chunk_no, chunk_total, 
+      file_name, file_md5, mime_type, 
+      external_path, creator, mender, 
+      create_time, update_time, is_del
+      )
+    values (#{id,jdbcType=BIGINT}, #{chunkNo,jdbcType=INTEGER}, #{chunkTotal,jdbcType=INTEGER}, 
+      #{fileName,jdbcType=VARCHAR}, #{fileMd5,jdbcType=CHAR}, #{mimeType,jdbcType=VARCHAR}, 
+      #{externalPath,jdbcType=VARCHAR}, #{creator,jdbcType=CHAR}, #{mender,jdbcType=CHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{isDel,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.htby.tech.kunlun.storage.entity.auto.FileChunkPO">
+    insert into t_file_chunk
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="chunkNo != null">
+        chunk_no,
+      </if>
+      <if test="chunkTotal != null">
+        chunk_total,
+      </if>
+      <if test="fileName != null">
+        file_name,
+      </if>
+      <if test="fileMd5 != null">
+        file_md5,
+      </if>
+      <if test="mimeType != null">
+        mime_type,
+      </if>
+      <if test="externalPath != null">
+        external_path,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="mender != null">
+        mender,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="isDel != null">
+        is_del,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="chunkNo != null">
+        #{chunkNo,jdbcType=INTEGER},
+      </if>
+      <if test="chunkTotal != null">
+        #{chunkTotal,jdbcType=INTEGER},
+      </if>
+      <if test="fileName != null">
+        #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileMd5 != null">
+        #{fileMd5,jdbcType=CHAR},
+      </if>
+      <if test="mimeType != null">
+        #{mimeType,jdbcType=VARCHAR},
+      </if>
+      <if test="externalPath != null">
+        #{externalPath,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=CHAR},
+      </if>
+      <if test="mender != null">
+        #{mender,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDel != null">
+        #{isDel,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.htby.tech.kunlun.storage.entity.auto.FileChunkPOExample" resultType="java.lang.Long">
+    select count(*) from t_file_chunk
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_file_chunk
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.chunkNo != null">
+        chunk_no = #{record.chunkNo,jdbcType=INTEGER},
+      </if>
+      <if test="record.chunkTotal != null">
+        chunk_total = #{record.chunkTotal,jdbcType=INTEGER},
+      </if>
+      <if test="record.fileName != null">
+        file_name = #{record.fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileMd5 != null">
+        file_md5 = #{record.fileMd5,jdbcType=CHAR},
+      </if>
+      <if test="record.mimeType != null">
+        mime_type = #{record.mimeType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.externalPath != null">
+        external_path = #{record.externalPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creator != null">
+        creator = #{record.creator,jdbcType=CHAR},
+      </if>
+      <if test="record.mender != null">
+        mender = #{record.mender,jdbcType=CHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isDel != null">
+        is_del = #{record.isDel,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_file_chunk
+    set id = #{record.id,jdbcType=BIGINT},
+      chunk_no = #{record.chunkNo,jdbcType=INTEGER},
+      chunk_total = #{record.chunkTotal,jdbcType=INTEGER},
+      file_name = #{record.fileName,jdbcType=VARCHAR},
+      file_md5 = #{record.fileMd5,jdbcType=CHAR},
+      mime_type = #{record.mimeType,jdbcType=VARCHAR},
+      external_path = #{record.externalPath,jdbcType=VARCHAR},
+      creator = #{record.creator,jdbcType=CHAR},
+      mender = #{record.mender,jdbcType=CHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      is_del = #{record.isDel,jdbcType=TINYINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.htby.tech.kunlun.storage.entity.auto.FileChunkPO">
+    update t_file_chunk
+    <set>
+      <if test="chunkNo != null">
+        chunk_no = #{chunkNo,jdbcType=INTEGER},
+      </if>
+      <if test="chunkTotal != null">
+        chunk_total = #{chunkTotal,jdbcType=INTEGER},
+      </if>
+      <if test="fileName != null">
+        file_name = #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileMd5 != null">
+        file_md5 = #{fileMd5,jdbcType=CHAR},
+      </if>
+      <if test="mimeType != null">
+        mime_type = #{mimeType,jdbcType=VARCHAR},
+      </if>
+      <if test="externalPath != null">
+        external_path = #{externalPath,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=CHAR},
+      </if>
+      <if test="mender != null">
+        mender = #{mender,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDel != null">
+        is_del = #{isDel,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.htby.tech.kunlun.storage.entity.auto.FileChunkPO">
+    update t_file_chunk
+    set chunk_no = #{chunkNo,jdbcType=INTEGER},
+      chunk_total = #{chunkTotal,jdbcType=INTEGER},
+      file_name = #{fileName,jdbcType=VARCHAR},
+      file_md5 = #{fileMd5,jdbcType=CHAR},
+      mime_type = #{mimeType,jdbcType=VARCHAR},
+      external_path = #{externalPath,jdbcType=VARCHAR},
+      creator = #{creator,jdbcType=CHAR},
+      mender = #{mender,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      is_del = #{isDel,jdbcType=TINYINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

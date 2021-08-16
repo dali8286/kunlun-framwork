@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.htby.tech.kunlun.audit.dao.def.AuditDefDAO">
+
+    <select id="listAuditByCondition" resultType="com.htby.tech.kunlun.audit.entity.def.AuditSimpleSearchDefPO">
+        select t.audit_id                          as                        audit_id,
+               t.target_id                         as                        target_id,
+               t.status                            as                        status,
+               t.mender                            as                        auditor_id,
+               t.update_time                       as                        audit_time
+          from t_audit t
+         where t.is_del = 0
+        <if test="status != null">
+            and t.status = #{status}
+        </if>
+        <if test="auditModule != null">
+            and t.audit_module = #{auditModule}
+        </if>
+    </select>
+</mapper>

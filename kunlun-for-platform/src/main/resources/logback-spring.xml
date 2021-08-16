@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <jmxConfigurator/>
+    <springProperty scope="context" name="logCommonLevel" source="log.common.level" />
+    <springProperty scope="context" name="logCommonPath" source="log.common.path" />
+
+    <springProfile name="local">
+        <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</pattern>
+                <charset>UTF-8</charset>
+            </encoder>
+        </appender>
+
+        <root level="info">
+            <appender-ref ref="console"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="dev">
+        <appender name="businessLogFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>${logCommonPath}/business.log</file>
+            <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+                <level>${logCommonLevel}</level>
+            </filter>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>${logCommonPath}/business-%d{yyyy-MM-dd}_%i.log.zip</fileNamePattern>
+                <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                    <maxFileSize>100MB</maxFileSize>
+                </timeBasedFileNamingAndTriggeringPolicy>
+                <maxHistory>30</maxHistory>
+            </rollingPolicy>
+            <encoder>
+                <pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</pattern>
+                <charset>UTF-8</charset>
+            </encoder>
+        </appender>
+
+        <appender name="errorLogFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>${logCommonPath}/error.log</file>
+            <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+                <level>error</level>
+            </filter>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>${logCommonPath}/error-%d{yyyy-MM-dd}_%i.log.zip</fileNamePattern>
+                <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                    <maxFileSize>100MB</maxFileSize>
+                </timeBasedFileNamingAndTriggeringPolicy>
+                <maxHistory>30</maxHistory>
+            </rollingPolicy>
+            <encoder>
+                <pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</pattern>
+                <charset>UTF-8</charset>
+            </encoder>
+        </appender>
+
+        <appender name="accountLogFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>${logCommonPath}/account.log</file>
+            <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+                <level>${logCommonLevel}</level>
+            </filter>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>${logCommonPath}/account-%d{yyyy-MM-dd}_%i.log.zip</fileNamePattern>
+                <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                    <maxFileSize>100MB</maxFileSize>
+                </timeBasedFileNamingAndTriggeringPolicy>
+                <maxHistory>30</maxHistory>
+            </rollingPolicy>
+            <encoder>
+                <pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</pattern>
+                <charset>UTF-8</charset>
+            </encoder>
+        </appender>
+
+        <logger name="com.htby.tech.kunlun.platform.web.log.interceptor.AccountLogInterceptor" level="${logCommonLevel}" additivity="false">
+            <appender-ref ref="accountLogFile"/>
+        </logger>
+
+        <root level="${logCommonLevel}">
+            <appender-ref ref="businessLogFile"/>
+            <appender-ref ref="errorLogFile"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="online">
+        <appender name="businessLogFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>${logCommonPath}/business.log</file>
+            <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+                <level>${logCommonLevel}</level>
+            </filter>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>${logCommonPath}/business-%d{yyyy-MM-dd}_%i.log.zip</fileNamePattern>
+                <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                    <maxFileSize>100MB</maxFileSize>
+                </timeBasedFileNamingAndTriggeringPolicy>
+                <maxHistory>30</maxHistory>
+            </rollingPolicy>
+            <encoder>
+                <pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</pattern>
+                <charset>UTF-8</charset>
+            </encoder>
+        </appender>
+
+        <appender name="errorLogFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>${logCommonPath}/error.log</file>
+            <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+                <level>error</level>
+            </filter>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>${logCommonPath}/error-%d{yyyy-MM-dd}_%i.log.zip</fileNamePattern>
+                <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                    <maxFileSize>100MB</maxFileSize>
+                </timeBasedFileNamingAndTriggeringPolicy>
+                <maxHistory>30</maxHistory>
+            </rollingPolicy>
+            <encoder>
+                <pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</pattern>
+                <charset>UTF-8</charset>
+            </encoder>
+        </appender>
+
+        <appender name="accountLogFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>${logCommonPath}/account.log</file>
+            <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+                <level>${logCommonLevel}</level>
+            </filter>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>${logCommonPath}/account-%d{yyyy-MM-dd}_%i.log.zip</fileNamePattern>
+                <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                    <maxFileSize>100MB</maxFileSize>
+                </timeBasedFileNamingAndTriggeringPolicy>
+                <maxHistory>30</maxHistory>
+            </rollingPolicy>
+            <encoder>
+                <pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</pattern>
+                <charset>UTF-8</charset>
+            </encoder>
+        </appender>
+
+        <logger name="com.htby.tech.kunlun.platform.web.log.interceptor.AccountLogInterceptor" level="${logCommonLevel}" additivity="false">
+            <appender-ref ref="accountLogFile"/>
+        </logger>
+
+        <root level="${logCommonLevel}">
+            <appender-ref ref="businessLogFile"/>
+            <appender-ref ref="errorLogFile"/>
+        </root>
+    </springProfile>
+</configuration>

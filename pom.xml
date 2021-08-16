@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.htby.tech</groupId>
+    <artifactId>kunlun-framwork</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0.0</version>
+
+    <modules>
+        <module>kunlun-base</module>
+        <module>kunlun-audit</module>
+        <module>kunlun-notify</module>
+        <module>kunlun-for-platform</module>
+        <module>kunlun-for-storage</module>
+    </modules>
+
+    <parent>
+        <groupId>com.htby.tech</groupId>
+        <artifactId>kunlun-pom</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.8</java.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+
+        <utils.version>1.0.2</utils.version>
+        <runtime.base.version>1.0.0</runtime.base.version>
+        <runtime.core.version>1.0.0</runtime.core.version>
+        <runtime.db.version>1.0.0</runtime.db.version>
+        <runtime.file.version>1.0.0</runtime.file.version>
+        <runtime.cache.version>1.0.0</runtime.cache.version>
+        <runtime.web.version>1.0.0</runtime.web.version>
+        <runtime.notify.version>1.0.0</runtime.notify.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.htby.tech</groupId>
+                <artifactId>kunlun-utils</artifactId>
+                <version>${utils.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.htby.tech</groupId>
+                <artifactId>kunlun-runtime-base</artifactId>
+                <version>${runtime.base.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.htby.tech</groupId>
+                <artifactId>kunlun-runtime-core</artifactId>
+                <version>${runtime.core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.htby.tech</groupId>
+                <artifactId>kunlun-runtime-db</artifactId>
+                <version>${runtime.db.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.htby.tech</groupId>
+                <artifactId>kunlun-runtime-file</artifactId>
+                <version>${runtime.file.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.htby.tech</groupId>
+                <artifactId>kunlun-runtime-cache</artifactId>
+                <version>${runtime.cache.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.htby.tech</groupId>
+                <artifactId>kunlun-runtime-web</artifactId>
+                <version>${runtime.web.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.htby.tech</groupId>
+                <artifactId>kunlun-runtime-notify</artifactId>
+                <version>${runtime.notify.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.aliyun</groupId>
+                <artifactId>aliyun-java-sdk-core</artifactId>
+                <optional>true</optional>
+                <version>4.1.1</version>
+            </dependency>
+            <dependency>
+                <groupId>com.htby.tech</groupId>
+                <artifactId>kunlun-base</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.htby.tech</groupId>
+                <artifactId>kunlun-audit</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.htby.tech</groupId>
+                <artifactId>kunlun-notify</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.baidu.aip</groupId>
+                <artifactId>java-sdk</artifactId>
+                <version>4.11.0</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>
